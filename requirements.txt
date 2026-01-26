@@ -33,5 +33,8 @@ torchaudio
 numpy
 scikit-learn
 
+# Tools
+langchain-tavily
+
 # Streaming Services
 streamlit

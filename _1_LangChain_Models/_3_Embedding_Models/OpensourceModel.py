@@ -6,7 +6,7 @@ import os
 # ---------------------------------------------------------
 os.environ["HF_HUB_ENABLE_XET"] = "0"
 # Optional: set custom model cache directory
-os.environ['HF_HOME'] = r"D:\Python_Stack\Langchain\LLM_Downloads"
+os.environ['HF_HOME'] = r"D:\GEN-AI\LLM_Downloads"
 
 
 embeddings = HuggingFaceEmbeddings(model ="sentence-transformers/all-mpnet-base-v2")
