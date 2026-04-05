@@ -5,4 +5,4 @@ load_dotenv()
 llm = HuggingFaceEndpoint(model='deepseek-ai/DeepSeek-R1',task="text-generation",temperature=0.7,provider="auto")
 model = ChatHuggingFace(llm=llm)
 response = model.invoke("What is the capital of India?")
-print(response.content)
+print(response.content) # type: ignore

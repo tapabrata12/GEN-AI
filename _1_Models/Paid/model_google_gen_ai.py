@@ -6,4 +6,4 @@ load_dotenv()
 llm = ChatGoogleGenerativeAI(model="gemini-3.1-pro-preview")
 
 response = llm.invoke("What is the capital of France?")
-print(response.content)
+print(response.content) # type: ignore

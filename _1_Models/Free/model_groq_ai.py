@@ -7,4 +7,4 @@ llm = ChatGroq(model='openai/gpt-oss-120b',temperature=1)
 
 response = llm.invoke("What is AI?")
 
-print(response.content)
+print(response.content) # type: ignore

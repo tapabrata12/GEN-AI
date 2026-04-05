@@ -8,4 +8,4 @@ llm = ChatOpenAI(
 )
 
 response = llm.invoke("What is AI?")
-print(response.content)
+print(response.content) # type: ignore
