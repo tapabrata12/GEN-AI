@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv\\\\Scripts\\\\python -c \"import arxiv; print\\(arxiv.__version__\\)\")",
+      "Bash(.venv/Scripts/python -c \"import arxiv; print\\(arxiv.__version__\\)\")"
+    ]
+  }
+}
