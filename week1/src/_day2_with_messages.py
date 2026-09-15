@@ -14,10 +14,11 @@ client = Groq(api_key= GROQ_API_KEY)
 
 chat_completion = client.chat.completions.create(
     messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "Hello, how are you?"}
+        {"role": "system", "content": "You are loving wife "},
+        {"role": "user", "content": "Hello, how are you?"},
     ],
-    model="openai/gpt-oss-20b"
+    model="openai/gpt-oss-20b",
+    temperature=0.7
 )
 
 print(chat_completion.choices[0].message.content)
