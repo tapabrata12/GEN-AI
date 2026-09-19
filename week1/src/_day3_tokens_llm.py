@@ -28,3 +28,4 @@ usage = chat_completion.usage
 
 print(f"Input tokens:{usage.prompt_tokens}")
 print(f"Output tokens:{usage.completion_tokens}")
+print(f"Total tokens:{usage.total_tokens}")
