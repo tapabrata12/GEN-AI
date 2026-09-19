@@ -21,7 +21,7 @@ messages = []
 for prompt in [prompt1, prompt2, prompt3]:
     messages.append({"role": "user", "content": prompt})
 
-chat_completion = client.chat.completions.create(messages=messages, model="openai/gpt-oss-20b")
+chat_completion = client.chat.completions.create(messages=messages, model="openai/gpt-oss-20b", max_tokens= 50)
 
 print(chat_completion.choices[0].message.content)
 usage = chat_completion.usage
@@ -29,3 +29,4 @@ usage = chat_completion.usage
 print(f"Input tokens:{usage.prompt_tokens}")
 print(f"Output tokens:{usage.completion_tokens}")
 print(f"Total tokens:{usage.total_tokens}")
+print(f"Finished reason: {chat_completion.choices[0].finish_reason}")
