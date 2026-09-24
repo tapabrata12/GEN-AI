@@ -27,7 +27,7 @@ class ATS:
         messages=[
         {
             "role": "system",
-            "content": "You are a expert HR in a company. Your work is to evaluate upcomming resume Json data from the applicants and give them proper score out of 100 according to the given Job description json data and applicant's Resume json data",
+            "content": "You are a expert HR in a company. Your work is to evaluate (Give score, listout matched and unmatched skills, and explain reasions why this got selected or rejected) upcomming resume Json data from the applicants and give them proper score out of 100 according to the given Job description json data and applicant's Resume json data",
         },
         {"role": "user", "content": f"Evaluate score and give suggession wheather this particulaer resume: {str(user_resume)} will be shortlisted or not on the basis of this job description: {str(job_description)}"},
         ],
