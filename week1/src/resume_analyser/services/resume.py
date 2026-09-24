@@ -69,6 +69,3 @@ class Resume(BaseModel):
         list[str] | None,
         Field(description="List of skills possessed by the candidate")
     ]
-
-
-# print(json.dumps(Resume.model_json_schema(), indent=2))

@@ -24,18 +24,29 @@ class JobDescriptionConverter:
         client = Groq()
 
         response = client.chat.completions.create(
-            model="qwen/qwen3.8-27b",
+            model="openai/gpt-oss-20b",
             messages=[
                 {
                     "role": "system",
-                    "content": "You are a helpful assistant that extracts structured information from job descriptions."
+                    "content": (
+                        "Extract job descriptions into the requested JSON schema. "
+                        "Return only valid JSON. Use an empty list when a skills, "
+                        "education, or responsibilities category is not present. "
+                        "Use 0 when minimum experience is not specified."
+                    )
                 },
                 {
                     "role": "user",
-                    "content": f"Extract the following information from the job description: role, required skills, preferred skills, minimum experience, educational requirements, and responsibilities. Format the output as a JSON object.\n\nJob Description:\n{self.job_description}"
+                    "content": (
+                        "Extract the role, required skills, preferred skills, minimum "
+                        "experience, educational requirements, and responsibilities "
+                        "from this job description.\n\n"
+                        f"Job Description:\n{self.job_description}"
+                    )
                 }
             ],
             temperature=0,
+            max_tokens=2000,
             response_format={
                 "type": "json_schema",
                 "json_schema":{
@@ -53,8 +64,12 @@ class JobDescriptionConverter:
         structured_response = self.__generate_answer_from_llm()
 
         try:
+            if not structured_response:
+                raise ValueError("The job-description model returned an empty response.")
+
             # Convert JSON string -> Pydantic object
-            return JobDescription.model_validate_json(structured_response)
+            job_description_instance = JobDescription.model_validate_json(structured_response)
+            return job_description_instance.model_dump_json()
 
         except Exception as e:
             raise ValueError(

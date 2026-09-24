@@ -1,7 +1,10 @@
 from pathlib import Path
 from pypdf import PdfReader
 import docx
-from resume import Resume
+try:
+    from .resume import Resume
+except ImportError:
+    from services.resume import Resume
 from groq import Groq
 from dotenv import load_dotenv
 import json
@@ -101,17 +104,20 @@ class ReadResume:
             validated_response = Resume.model_validate(json.loads(structured_JD_response))
             return json.dumps(validated_response.model_dump(), indent=2)
         
-        DOCS_text = self.__extract_text_from_docx()
-        structured_JD_response = self.__get_structured_JD_by_llm(DOCS_text)
+        if is_document_type != "Confirmed DOCX":
+            raise ValueError(f"Unsupported document format: {self.file_path}")
+
+        docx_text = self.__extract_text_from_docx()
+        structured_JD_response = self.__get_structured_JD_by_llm(docx_text)
         validated_response = Resume.model_validate(json.loads(structured_JD_response))
-        return validated_response.model_dump_json(indent=2)
+        return json.dumps(validated_response.model_dump(), indent=2)
 
 
 
-# Example execution
-if __name__ == "__main__":
-    try:
-        a = ReadResume()
-        print(a.parse_document())
-    except FileNotFoundError as e:
-        print(f"Error: {e}")
+# # Example execution
+# if __name__ == "__main__":
+#     try:
+#         a = ReadResume()
+#         print(a.parse_document())
+#     except FileNotFoundError as e:
+#         print(f"Error: {e}")
